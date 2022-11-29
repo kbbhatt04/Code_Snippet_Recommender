@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header style="margin-top: 10px;">
+	<div class="logo" style="margin-left: 5px;display:inline;float: left; margin-right:75px;margin-top: 5px;">
+	  <a href="{{url_for("dashboard")}}"><img alt="BufferOverflow" src="../static/media/logo.png" width=400px></a>
+	</div>
+	<form name="search_form">
+		<div class="bar" style="display:inline;width: 700px; border-radius: 30px; border: 1px solid #dcdcdc;">
+		  <input class="searchbar" type="text" title="Search" name="keywords" placeholder="Search snippet here..." style="height: 45px; border: none; width: 700px; font-size: 24px; outline: none;float:left; margin-right:10px;" required>
+		</div>
+		<div class="buttons" style="display:inline;float:left;">
+		  <button class="btn btn--primary" type="submit">Search Snippet</button>
+		</div>
+	</form>
+	{% if session['logged_in'] %}
+	<div style="float:right;margin-top: -28px;margin-right: 10px;">
+	  <a href="/user/signout" class="btn btn--primary">Sign Out</a>
+	</div>
+	{% else %}
+	<div style="float:right;margin-top: -28px;margin-right: 10px;">
+		<a href="{{ url_for("signin") }}" class="btn btn--primary">Sign In</a>
+	</div>
+	{% endif %}
+	
+
+</header>  
+
+<div class="card-wrapper" style="clear:both;">
+	{% if length == 0 %}
+	<div class="card">
+		No matching code snippets found!
+	</div>
+	{% endif %}
+	{% set counter = 0 %}
+	{% for record in result %}
+		<div class="card">
+			{% set counter = counter + 1 %}
+			<strong>User:</strong> {{ record['user_email'] }} <br>
+			<strong>Language:</strong> {{ record['language'] }} <br>
+			<strong>Description:</strong> {{ record['description'] }} <br>
+			<strong>Votes:</strong> {{ record['votes'] }} <br>
+			
+			<strong>Code Snippet: </strong><button class="btn" id="copytoclip" onclick="copyContent('code'+{{loop.index}})"><img src="../static/media/copy.png" alt="copy" width=30px height=30px></button><br> <pre><code id="code{{ loop.index }}">{{ record['snippet'] }}</code></pre> <br>
+			<script>
+			const copyContent = async (id) => {
+				let text = document.getElementById(id).innerHTML;
+				try {
+				await navigator.clipboard.writeText(text);
+				console.log('Content copied to clipboard');
+				} catch (err) {
+				console.error('Failed to copy: ', err);
+				}
+			}
+			</script>
+		
+			<a class="btn btn--primary" href="/search_result/upvote/{{ record['_id'] }}?upvote=1">Upvote</a>
+			<a class="btn btn--secondary" href="/search_result/downvote/{{ record['_id'] }}?downvote=1">Downvote</a>
+		</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
