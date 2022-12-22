@@ -1,36 +1,7 @@
 # 13_Code_Snippet_Recommender
-Code Snippet Recommender SSD Final Project
 
-## Project Description
-We have used the Python web development framework Flask for our project.
-We have a simple UI which has two options on screen, one is to contribute by uploading a
-code snippet, and the other one is search for code snippets serving a certain purpose.
-The user clicks on the button corresponding to their requirement and then they are redirected
-to another page accordingly.
-If the user intends to upload a particular code snippet, the user is redirected to the sign‐up
-page where the user either signs up or registers if they are a first time user.
-After logging in, the user is redirected to a form.
-The form asks the user for the language in which the code snippet is written, the keywords
-describing the code snippet, and finally the snippet itself.
-If the user intends to upload a particular code snippet, the user is redirected to the sign‐up
-page where the user either signs up or registers if they are a first time user.
-After logging in, the user is redirected to a form.
-The form asks the user for the language in which the code snippet is written, the keywords
-describing the code snippet, and finally the snippet itself.
-If the user wants to rate a particular snippet according to their experience and satisfaction,
-the user will have to register if they are a new user or login if they are already a registered
-user.
-To search for code snippets, the user need not register or log in. They can simply search in the
-search bar to view the desired snippets.
-
-### Team Members
-Karan Bhatt - 2022202003
-
-Deepak Singh Shekhawat - 2022202008
-
-Pritha Ghosh - 2022201067
-
-Devesh Nandan - 2022201080
+## Description
+Developed using Python web development framework Flask and MongoDB, Code Snippet Recommender offers users to upload or search for code snippets. To upload a code snippet user needs to register and login into the account and fill the Upload Form provided on the dashboard. User dashboard displays all the code snippets uploaded by the user and provides option to delete any code snippet. To search for any code snippet, user need not login and directly search from the homepage of the website. User needs to provide keywords(space separated) for searching and can filter any language specific code using "#<language>" keyword. User can also upvote/downvote any code after logging in.
 
 ### Requirements
 -python 3
@@ -45,8 +16,9 @@ Devesh Nandan - 2022201080
 
 -functools
 
+
 ### How to Run
-`./run`
+Execute command in the project directory: `./run`
 
 `http://127.0.0.1:5000` By default, running on this address
 
